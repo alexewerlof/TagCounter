@@ -1,0 +1,40 @@
+body {
+  font-family: monospace;
+  font-size: 13px;
+}
+
+table {
+  width: 10em;
+  border-spacing: 0;
+
+  th {
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 0.3em;
+  }
+
+  tbody tr {
+    cursor: default;
+
+    &:nth-child(even) {
+      background-color: #eee;
+    }
+
+    &:nth-child(odd) {
+      background-color: #ddd;
+    }
+
+    &[data-tag]:hover {
+      background-color: red;
+      color: white;
+    }
+  }
+
+  tfoot {
+    background-color: black;
+    color: white
+  }
+}
