@@ -28,5 +28,5 @@ table tbody tr[data-tag]:hover {
 }
 table tfoot {
   background-color: black;
-  color: #ffffff;
+  color: white;
 }
