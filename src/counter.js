@@ -25,7 +25,6 @@ var highlightedElements = [];
 
 function highlightTags (tagName) {
     if (tagName) {
-        console.log('Going to hightlight ' + tagName);
         var elements = document.getElementsByTagName(tagName);
         for (var i = 0; i < elements.length; i++) {
             //if it is a tag that can have a style
@@ -35,7 +34,6 @@ function highlightTags (tagName) {
             }
         }
     } else {
-        console.log('Unhighlighting any previously highlighted elements');
         for (var i = 0; i < highlightedElements.length; i++) {
             if (highlightedElements[i].style) {
                 highlightedElements[i].style.outline = '';

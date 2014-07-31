@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
+    "description": "name, description and version will be filled from package.json during gulp build",
     "name": "Tag Counter",
-    "description": "Counts the number of tags in a page.",
     "version": "1.0.0",
     "icons": {
         "128": "img/icon128.png"

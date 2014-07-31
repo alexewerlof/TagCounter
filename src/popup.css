@@ -1,32 +1,48 @@
 body {
-  font-family: monospace;
-  font-size: 13px;
+  font-size: 11px;
+  margin: 1px;
+  font-family: sans-serif;
+  cursor: default;
 }
 table {
-  width: 10em;
   border-spacing: 0;
-}
-table th {
-  text-align: left;
 }
 table th,
 table td {
-  padding: 0.3em;
+  text-align: left;
+  padding: 0.7em;
 }
-table tbody tr {
-  cursor: default;
+table .border-left {
+  border-left: 1px solid #d2d2d2;
+}
+table .bar {
+  background-color: #a1bee6;
+  height: 0.4em;
+  min-width: 0.4em;
+  border-radius: 100px;
+  border: 2px ridge #9abcde;
 }
 table tbody tr:nth-child(even) {
-  background-color: #eee;
+  background-color: #dedede;
 }
 table tbody tr:nth-child(odd) {
-  background-color: #ddd;
+  background-color: #eeeeee;
 }
 table tbody tr[data-tag]:hover {
-  background-color: red;
+  background-color: #ff0000;
   color: white;
 }
-table tfoot {
-  background-color: black;
-  color: white;
+table tbody tr[data-tag]:hover .border-left {
+  border-left: 1px solid transparent;
+}
+table tbody tr[data-tag]:hover .bar {
+  background-color: white;
+  border-color: white;
+}
+.subtle-text {
+  color: #8a8a8a;
+}
+code {
+  font-weight: bold;
+  font-family: inherit;
 }
