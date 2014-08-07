@@ -21,7 +21,7 @@
     "content_scripts": [
         {
             "matches": ["*://*/*"],
-            "js": ["counter.js"]
+            "js": ["TagCounter-content-script.js"]
         }
     ]
 }

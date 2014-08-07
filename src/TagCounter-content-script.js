@@ -1,6 +1,3 @@
-//the outline style that is used for highlighting elements
-var OUTLINE = '1px solid red';
-
 //Note: since this code is running on document_idle, DOM is in place. It may even run after window.onload
 /**
  * This function counts all the tags in this HTML file.
@@ -12,34 +9,43 @@ function countTags () {
     var freq = {};
     for (var i = 0; i < allElements.length; i++) {
         var tagName = allElements[i].tagName;
-        if (!freq.hasOwnProperty(tagName)) {
-            freq[tagName] = 0;
+        if (freq[tagName]) {
+            freq[tagName]++;
+        } else {
+            freq[tagName] = 1;
         }
-        freq[tagName]++;
     }
 
     return freq;
 }
 
-var highlightedElements = [];
+/** Holds a list of all elements that have been highlighted so that we can easily remove the highlight effect later */
+var hiEl = [];
 
+/**
+ * If there is a tagName, it will highlight all those tags by applying the OUTLINE style
+ * If tagName is empty, it will remove all outline styles from the elements that are already in hiEl array above.
+ * @param tagName
+ */
 function highlightTags (tagName) {
+    var i;
+    //the outline style that is used for highlighting elements
+    var OUTLINE = '1px solid red';
+
     if (tagName) {
         var elements = document.getElementsByTagName(tagName);
-        for (var i = 0; i < elements.length; i++) {
-            //if it is a tag that can have a style
-            if (elements[i].style) {
+        //All elements are from the same tag. If it is a kind of tag that can have a style
+        if ( elements.length && elements[0].style) {
+            for (i = elements.length - 1; i >= 0; i--) {
+                hiEl.push(elements[i]);
                 elements[i].style.outline = OUTLINE;
-                highlightedElements.push(elements[i]);
             }
         }
     } else {
-        for (var i = 0; i < highlightedElements.length; i++) {
-            if (highlightedElements[i].style) {
-                highlightedElements[i].style.outline = '';
-            }
+        for (i = hiEl.length - 1; i >=0 ; i--) {
+            hiEl[i].style.outline = '';
         }
-        highlightedElements.length = 0;
+        hiEl.length = 0;
     }
 }
 
@@ -53,6 +59,4 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponseFn) 
 });
 
 //Tell the background page that this content script is loaded and ready to be called
-chrome.runtime.sendMessage({readyToCount: true}, function(response) {
-    //Do nothing. Wait for the page action to decide when it's time to count
-});
+chrome.runtime.sendMessage({readyToCount: true});
