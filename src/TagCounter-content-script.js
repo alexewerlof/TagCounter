@@ -51,9 +51,9 @@ function highlightTags (tagName) {
 
 //Register this content script for being called (the popup will call it)
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponseFn) {
-    if (message.countTags) {
+    if ('countTags' in message) {
         sendResponseFn(countTags());
-    } else if (message.highlightTags) {
+    } else if ('highlightTags' in message) {
         highlightTags(message.tagName);
     }
 });

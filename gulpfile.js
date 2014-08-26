@@ -12,6 +12,7 @@ var jsonminify = require('gulp-jsonminify');
 
 // Paths
 var path = {
+    src : './src/',
     build : './build/',
     release : './release/'
 };
@@ -27,7 +28,7 @@ gulp.task('clean', function () {
 gulp.task('manifest', function () {
     'use strict';
 
-    return gulp.src("./src/manifest.json")
+    return gulp.src(path.src + "manifest.json")
         .pipe(jeditor({
             description: pkg.description,
             name: pkg.name,
@@ -41,7 +42,7 @@ gulp.task('manifest', function () {
 gulp.task('minify-js', function () {
     'use strict';
 
-    return gulp.src(['./src/*.js'])
+    return gulp.src([path.src + '*.js'])
         .pipe(uglify())
         .pipe(gulp.dest(path.build));
 });
@@ -50,7 +51,7 @@ gulp.task('minify-js', function () {
 gulp.task('minify-html', function () {
     'use strict';
 
-    return gulp.src('src/*.html')
+    return gulp.src(path.src + '*.html')
         .pipe(minifyHTML())
         .pipe(gulp.dest(path.build));
 });
@@ -59,7 +60,7 @@ gulp.task('minify-html', function () {
 gulp.task('minify-css', function () {
     'use strict';
 
-    return gulp.src('src/*.css')
+    return gulp.src(path.src + '*.css')
         .pipe(minifyCSS())
         .pipe(gulp.dest(path.build));
 });
@@ -68,15 +69,20 @@ gulp.task('minify-css', function () {
 gulp.task('copy-img', function () {
     'use strict';
 
-    return gulp.src('src/img/**/*', { base: './src' })
+    return gulp.src(path.src + 'img/**/*', { base: './src' })
         .pipe(gulp.dest(path.build));
 });
 
-//zip the build folder ready to upload to WebStore
-gulp.task('default', ['manifest', 'minify-js', 'minify-html', 'minify-css', 'copy-img'], function () {
-    'use strict';
+//populate the build folder
+gulp.task('build', ['manifest', 'minify-js', 'minify-html', 'minify-css', 'copy-img'], function () {
+});
 
+gulp.task('dist', ['build'], function () {
     return gulp.src(path.build + '**')
         .pipe(zip(pkg.name + '-' + pkg.version + '.zip'))
         .pipe(gulp.dest(path.release));
+});
+
+//zip the build folder ready to upload to WebStore
+gulp.task('default', ['build'], function () {
 });

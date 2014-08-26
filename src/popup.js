@@ -1,4 +1,4 @@
-//maximum width of the bar diagram on each row in pixel
+//maximum width of a bar
 var BAR_MAX = 200;
 
 function getStatsHtml(stats) {
@@ -58,13 +58,13 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 /** the event listener for when the mouse of over a row */
 function onmouseover (e) {
     chrome.tabs.sendMessage(tabId, {highlightTags: true, tagName: e.currentTarget.dataset['tag']}, function (response) {
-        //signal the TagCounter-content-script.js script to highlight all instances of the tag
+        //signal the tagcounter.js script to highlight all instances of the tag
     });
 }
 
 /** the event listener for when the mouse leaves a row */
 function onmouseout() {
-    chrome.tabs.sendMessage(tabId, {highlightTags: true}, function (response) {
+    chrome.tabs.sendMessage(tabId, {highlightTags: false}, function (response) {
         //no tag is specified so it will unhighlight the tags previously highlighted
     });
 }
