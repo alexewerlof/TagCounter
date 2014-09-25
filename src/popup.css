@@ -25,11 +25,14 @@ body {
   display: none;
 }
 #settings input:checked + label {
-  color: inherit;
+  color: #ff0000;
 }
 #settings label {
   color: #888888;
   cursor: pointer;
+}
+#settings label:hover {
+  color: inherit;
 }
 #html5-label {
   display: inline-block;
