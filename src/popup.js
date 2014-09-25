@@ -1,3 +1,8 @@
+var app = angular.module('app', []);
+app.controller('TagCounterCtrl', [function () {
+
+}]);
+
 //maximum width of a bar
 var BAR_MAX = 200;
 

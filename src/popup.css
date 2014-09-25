@@ -1,8 +1,101 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('img/fontawesome-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   font-size: 11px;
   margin: 1px;
   font-family: sans-serif;
   cursor: default;
+}
+#settings {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 1.3em;
+}
+#settings li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+#settings input {
+  display: none;
+}
+#settings input:checked + label {
+  color: inherit;
+}
+#settings label {
+  color: #888888;
+  cursor: pointer;
+}
+#html5-label {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#html5-label::before {
+  content: '\f13b';
+}
+#html4-label {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#html4-label::before {
+  content: '\f121';
+}
+#svg-label {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#svg-label::before {
+  content: '\f03e';
+}
+#unknown-label {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#unknown-label::before {
+  content: '\f128';
+}
+#obsolete-label {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#obsolete-label::before {
+  content: '\f071';
+}
+#draft-label {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#draft-label::before {
+  content: '\f0c3';
 }
 table {
   border-spacing: 0;

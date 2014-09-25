@@ -1,6 +1,6 @@
 {
   "name": "TagCounter",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Counts the number of tags in a page.",
   "main": "src/tagcounter.js",
   "scripts": {
