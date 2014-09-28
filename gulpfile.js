@@ -5,6 +5,7 @@ var pkg = require('./package.json');
 var uglify = require('gulp-uglify');
 var clean = require('gulp-clean');
 var zip = require('gulp-zip');
+var size = require('gulp-size');
 var jeditor = require("gulp-json-editor");
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
@@ -44,7 +45,8 @@ gulp.task('minify-js', function () {
 
     return gulp.src([path.src + '*.js'])
         .pipe(uglify())
-        .pipe(gulp.dest(path.build));
+        .pipe(gulp.dest(path.build))
+        .pipe(size({showFiles: true}));
 });
 
 //minify html files

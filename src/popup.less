@@ -1,7 +1,10 @@
 @border-color: #d2d2d2;
 @highlight-color: red;
 @disabled-color: #888;
-@bar-height: 0.4em;
+@bar-height: 7px;
+@bar-color: #83bfe6;
+@fg-color: #222;
+@subtle-fg-color: #8a8a8a;
 
 @font-face {
   font-family: 'FontAwesome';
@@ -28,6 +31,7 @@ body {
   margin: 1px;
   font-family: sans-serif;
   cursor: default;
+  color: @fg-color;
 }
 
 #settings {
@@ -59,28 +63,49 @@ body {
   }
 }
 
-#html5-label {
-  .fontawesome-icon('\f13b');
+.type-icon {
+  &.html5 {
+    .fontawesome-icon('\f13b');
+  }
+  &.html4 {
+    .fontawesome-icon('\f121');
+  }
+
+  &.svg {
+    .fontawesome-icon('\f03e');
+  }
+
+  &.unknown {
+    .fontawesome-icon('\f128');
+  }
+
+  &.obsolete {
+    .fontawesome-icon('\f071');
+  }
+
+  &.draft {
+    .fontawesome-icon('\f0c3');
+  }
 }
 
-#html4-label {
-  .fontawesome-icon('\f121');
+.alphabetic-ascending {
+  .fontawesome-icon('\f15d');
 }
 
-#svg-label {
-  .fontawesome-icon('\f03e');
+.alphabetic-descending {
+  .fontawesome-icon('\f15e');
 }
 
-#unknown-label {
-  .fontawesome-icon('\f128');
+.amount-ascending {
+  .fontawesome-icon('\f160');
 }
 
-#obsolete-label {
-  .fontawesome-icon('\f071');
+.amount-descending {
+  .fontawesome-icon('\f161');
 }
 
-#draft-label {
-  .fontawesome-icon('\f0c3');
+.border-left {
+  border-left: 1px solid @border-color;
 }
 
 table {
@@ -92,16 +117,17 @@ table {
     padding: 0.7em;
   }
 
-  .border-left {
-    border-left: 1px solid @border-color;
-  }
+  .bar-container {
+    width: 130px;
 
-  .bar {
-    background-color: #a1bee6;
-    height: @bar-height;
-    min-width: @bar-height;
-    border-radius: 100px;
-    border: 2px ridge #9abcde;
+    .bar {
+      background-color: @bar-color;
+      height: @bar-height;
+      min-width: @bar-height;
+      border-radius: @bar-height;
+      border: 1px solid @bar-color;
+      box-shadow: 0 1px 1px 0px fade(#fff, 70%) inset;
+    }
   }
 
   tbody tr {
@@ -113,7 +139,7 @@ table {
       background-color: #eeeeee;
     }
 
-    &[data-tag]:hover {
+    &.tag-row:hover {
       background-color: @highlight-color;
       color: white;
 
@@ -130,7 +156,7 @@ table {
 }
 
 .subtle-text {
-  color: #8a8a8a;
+  color: @subtle-fg-color;
 }
 
 code {

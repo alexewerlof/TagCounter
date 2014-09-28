@@ -1,56 +1,71 @@
 <!doctype html>
-<html ng-app="app">
+<html ng-app="popup" ng-csp>
 <head>
     <script src="angular.js"></script>
     <script src="popup.js"></script>
+    <script src="tagtype.js"></script>
     <meta charset="UTF-8">
     <title>TagCounter</title>
     <link rel="stylesheet" href="popup.css"/>
 </head>
 <body>
-<table>
-    <caption>
-        <ul id="settings">
-            <li title="Show HTML5 elements like <article> and <main>">
-                <input id="html5-checkbox" type="checkbox" class="-tbtn" mg-model="showHtml5Elements" checked />
-                <label id="html5-label" for="html5-checkbox"></label>
-            </li>
-            <li title="Show the good old HTML4 elements like <p> and <div>">
-                <input id="html4-checkbox" type="checkbox" class="-tbtn" mg-model="showHtml4Elements" />
-                <label id="html4-label" for="html4-checkbox"></label>
-            </li>
-            <li title="Show SVG-specific elements like <circle> and <rect>">
-                <input id="svg-checkbox" type="checkbox" class="-tbtn" mg-model="showSvgElements" />
-                <label id="svg-label" for="svg-checkbox"></label>
-            </li>
-            <li title="Show unknown elements like Angular tags or Web Components">
-                <input id="unknown-checkbox" type="checkbox" class="-tbtn" mg-model="showUnknownElements" />
-                <label id="unknown-label" for="unknown-checkbox"></label>
-            </li>
-            <li title="Show obsolete tags like <center> and <applet>">
-                <input id="obsolete-checkbox" type="checkbox" class="-tbtn" mg-model="showObsoleteElements" />
-                <label id="obsolete-label" for="obsolete-checkbox"></label>
-            </li>
-            <li title="Show draft tags which are experimental">
-                <input id="draft-checkbox" type="checkbox" class="-tbtn" mg-model="showDraftElements" />
-                <label id="draft-label" for="draft-checkbox"></label>
-            </li>
-        </ul>
-    </caption>
+<table ng-controller="TagCounterCtrl">
+    <ul id="settings">
+        <li title="HTML5 elements like <article> and <main>">
+            <input id="html5-checkbox" type="checkbox" class="-tbtn" mg-model="showHtml5Elements" checked />
+            <label for="html5-checkbox"><i class="type-icon html5"></i></label>
+        </li>
+        <li title="Good old HTML4 elements like <p> and <div>">
+            <input id="html4-checkbox" type="checkbox" class="-tbtn" mg-model="showHtml4Elements" />
+            <label for="html4-checkbox"><i class="type-icon html4"></i></label>
+        </li>
+        <li title="SVG elements like <circle> and <rect>">
+            <input id="svg-checkbox" type="checkbox" class="-tbtn" mg-model="showSvgElements" />
+            <label for="svg-checkbox"><i class="type-icon svg"></i></label>
+        </li>
+        <li title="Unknown elements like Angular tags or Web Components">
+            <input id="unknown-checkbox" type="checkbox" class="-tbtn" mg-model="showUnknownElements" />
+            <label for="unknown-checkbox"><i class="type-icon unknown"></i></label>
+        </li>
+        <li title="Obsolete tags like <center> and <applet>">
+            <input id="obsolete-checkbox" type="checkbox" class="-tbtn" mg-model="showObsoleteElements" />
+            <label for="obsolete-checkbox"><i class="type-icon obsolete"></i></label>
+        </li>
+        <li title="W3C draft tags which are experimental">
+            <input id="draft-checkbox" type="checkbox" class="-tbtn" mg-model="showDraftElements" />
+            <label for="draft-checkbox"><i class="type-icon draft"></i></label>
+        </li>
+    </ul>
     <thead>
     <tr>
         <th>
             Tags<br/>
-            {{tag-number}}
+            <span title="Number of unique tags">{{tagNumber}}</span>
+            <i class="type-icon alphabetic-ascending"></i>
         </th>
         <th class="border-left" colspan="2">
             Count<br/>
-            {{total-tags}}
+            <span title="Total number of elements">{{elementNumber}}</span>
+            <i class="type-icon amount-ascending"></i>
         </th>
     </tr>
     </thead>
     <tbody id="table-body">
     <!-- this will be filled in popup.js -->
+    <tr class="tag-row" ng-repeat="tag in tags" ng-mouseenter="highlightTags(tag.name)" ng-mouseleave="unhighlight()" >
+        <th title="{{tag.name}} is a {{tag.type}} tag">
+            <i class="type-icon {{tag.type}} subtle-text"></i>
+            <code>{{tag.name}}</code>
+        </th>
+        <td class="border-left" title="There are {{tag.freq}} <{{tag.name}}> tag(s)">
+            {{tag.freq}}
+        </td>
+        <td class="border-left" title="{{tag.percent}}% of all page elements are <{{tag.name}}>">
+            <div class="bar-container">
+                <div class="bar" style="width:{{tag.percent}}%;"></div>
+            </div>
+        </td>
+    </tr>
     </tbody>
 </table>
 </body>

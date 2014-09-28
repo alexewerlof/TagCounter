@@ -1,75 +1,87 @@
-var app = angular.module('app', []);
-app.controller('TagCounterCtrl', [function () {
+/*global chrome*/
+var app = angular.module('popup', []);
 
-}]);
-
-//maximum width of a bar
-var BAR_MAX = 200;
-
-function getStatsHtml(stats) {
-    var ret = '';
-    //add all key/value pars to an array
-    var sortedStats = [];
-    var totalTags = 0;
-    for (var tagName in stats) {
-        sortedStats.push({tagName:tagName, freq: stats[tagName]});
-        totalTags += stats[tagName];
-    }
-    //write the number of used tags and the total number of all tags
-    document.getElementById('tag-number').innerHTML = sortedStats.length.toString();
-    document.getElementById('total-tags').innerHTML = totalTags.toString();
-    //first sort the array alphabetically
-    sortedStats.sort(function (a, b) {
-        if (a.tagName < b.tagName) {
-            return -1;
-        } else if (a.tagName > b.tagName) {
-            return 1;
-        } else {
-            return 0;
+app.constant('chrome', chrome);
+app.constant('chromea', {
+    tabs: {
+        query: function (query, callback) {
+            callback([1]);
+        },
+        sendMessage: function (tabId, msg, callback) {
+            //setTimeout(function () {
+            callback(['html', 'body', 'a', 'a']);
+            //}, 0);
         }
-    });
-    //then sort it based on frequencies
-    /*
-     sortedStats.sort(function (a, b) {
-     return b.freq - a.freq;
-     });
-     */
-    for (var i = 0; i < sortedStats.length; i++) {
-        ret += '<tr data-tag="' + sortedStats[i].tagName + '">' +
-            '<td><code>&lt;' + sortedStats[i].tagName + '&gt;</code></td>' +
-            '<td class="border-left">' + sortedStats[i].freq + '</td>' +
-            '<td class="border-left"><div class="bar" style="width:' + Math.ceil(sortedStats[i].freq / totalTags * BAR_MAX) + 'px;"></div></td>' +
-            '</tr>';
-
     }
-    return ret;
-}
-
-
-var tabId; //this will cache the tabId
-chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    tabId = tabs[0].id;
-    chrome.tabs.sendMessage(tabId, {countTags: true}, function(response) {
-        var tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = getStatsHtml(response);
-        var rows = tableBody.childNodes;
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].addEventListener('mouseover', onmouseover);
-            rows[i].addEventListener('mouseout', onmouseout);
-        }
-    });
 });
 
-/** the event listener for when the mouse of over a row */
-function onmouseover (e) {
-    chrome.tabs.sendMessage(tabId, {highlightTags: true, tagName: e.currentTarget.dataset['tag']}, function (response) {
-        //signal the tagcounter.js script to highlight all instances of the tag
-    });
-}
+app.factory('getTabId', ['chrome', function (chrome) {
+    //cache the tabId
+    var tabIdCache;
+    /**
+     * does something in the current tab. For speed improvement it caches the tabId
+     * @param callback {function} The function to call when the tabId is resolved
+     */
+    return function getTabId(callback) {
+        if (tabIdCache) {
+            callback(tabIdCache);
+        } else {
+            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                tabIdCache = tabs[0].id;
+                callback(tabIdCache);
+            });
+        }
+    };
+}]);
 
-/** the event listener for when the mouse leaves a row */
-function onmouseout() {
-    chrome.tabs.sendMessage(tabId, {highlightTags: false}, function (response) {
-        //no tag is specified so it will unhighlight the tags previously highlighted
+app.factory('sendMessage', ['chrome', 'getTabId', function (chrome, getTabId) {
+    /**
+     * Sends a message to the content script
+     * @param msg {Object} the message object
+     * @param callback [function] the function that processes the results from the content script
+     */
+    return function sendMessage(msg, callback) {
+        getTabId(function (tabId) {
+            chrome.tabs.sendMessage(tabId, msg, callback || angular.noop);
+        });
+    }
+}]);
+
+app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function ($scope, sendMessage, tagType) {
+    $scope.elementNumber = 0;
+    $scope.tagNumber = 0;
+    $scope.tags = [];
+    sendMessage({fname: 'getAllElements'}, function (allElements) {
+        $scope.elementNumber = allElements.length;
+
+        //make an object where keys are tag names and values are frequencies
+        var freq = allElements.reduce(function (o, tagName) {
+            o[tagName] = (o[tagName] | 0 ) + 1;
+            return o;
+        }, {});
+
+        $scope.tagNumber = Object.keys(freq).length;
+
+        var tags = [];
+        for (var tagName in freq) {
+            if (freq.hasOwnProperty(tagName)) {
+                tags.push({
+                    name: tagName,
+                    freq: freq[tagName],
+                    percent: (100 * freq[tagName] / allElements.length).toFixed(2), //TODO: this line can be optimized
+                    type: tagType(tagName)
+                });
+            }
+        }
+
+        $scope.tags = tags;
+        $scope.$apply();
+        $scope.highlightTags = function (tagName) {
+            sendMessage({fname:'highlightTags', args: [tagName]});
+        };
+
+        $scope.unhighlight = function () {
+            sendMessage({fname:'unhighlight'});
+        };
     });
-}
+}]);
