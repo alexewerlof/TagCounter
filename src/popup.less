@@ -1,3 +1,5 @@
+@import "_angular-csp";
+
 @border-color: #d2d2d2;
 @highlight-color: red;
 @disabled-color: #888;
@@ -32,11 +34,17 @@ body {
   font-family: sans-serif;
   cursor: default;
   color: @fg-color;
+  width: 400px;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 #settings {
   margin: 0;
-  padding: 0;
+  padding: 0.5em;
   list-style-type: none;
   font-size: 1.3em;
 
@@ -55,15 +63,20 @@ body {
   }
 
   label {
-    color: @disabled-color;
-    cursor: pointer;
-    &:hover {
-      color: inherit;
-    }
+    .clickable;
   }
 }
 
-.type-icon {
+.clickable {
+  color: @disabled-color;
+  cursor: pointer;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+.icon {
   &.html5 {
     .fontawesome-icon('\f13b');
   }
@@ -86,48 +99,40 @@ body {
   &.draft {
     .fontawesome-icon('\f0c3');
   }
+
+  &.alphabetic-ascending {
+    .fontawesome-icon('\f15d');
+  }
+
+  &.alphabetic-descending {
+    .fontawesome-icon('\f15e');
+  }
+
+  &.amount-ascending {
+    .fontawesome-icon('\f160');
+  }
+
+  &.amount-descending {
+    .fontawesome-icon('\f161');
+  }
+
+  &.refresh {
+    .fontawesome-icon('\f021');
+  }
 }
 
-.alphabetic-ascending {
-  .fontawesome-icon('\f15d');
-}
-
-.alphabetic-descending {
-  .fontawesome-icon('\f15e');
-}
-
-.amount-ascending {
-  .fontawesome-icon('\f160');
-}
-
-.amount-descending {
-  .fontawesome-icon('\f161');
-}
-
-.border-left {
-  border-left: 1px solid @border-color;
+.sort-icons {
+  font-weight: normal !important;
 }
 
 table {
   border-spacing: 0;
+  width: 100%;
 
   th,
   td {
     text-align: left;
     padding: 0.7em;
-  }
-
-  .bar-container {
-    width: 130px;
-
-    .bar {
-      background-color: @bar-color;
-      height: @bar-height;
-      min-width: @bar-height;
-      border-radius: @bar-height;
-      border: 1px solid @bar-color;
-      box-shadow: 0 1px 1px 0px fade(#fff, 70%) inset;
-    }
   }
 
   tbody tr {
@@ -143,8 +148,8 @@ table {
       background-color: @highlight-color;
       color: white;
 
-      .border-left {
-        border-left: 1px solid transparent;
+      .subtle-text {
+        color: inherit;
       }
 
       .bar {
@@ -155,8 +160,26 @@ table {
   }
 }
 
+.bar-container {
+  width: 100px;
+
+  .bar {
+    background-color: @bar-color;
+    height: @bar-height;
+    min-width: @bar-height;
+    border-radius: @bar-height;
+    border: 1px solid @bar-color;
+    box-shadow: 0 1px 1px 0px fade(#fff, 70%) inset;
+  }
+}
+
+.border-left {
+  border-left: 1px solid @border-color;
+}
+
 .subtle-text {
   color: @subtle-fg-color;
+  font-weight: normal !important;;
 }
 
 code {

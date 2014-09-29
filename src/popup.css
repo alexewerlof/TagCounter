@@ -1,3 +1,27 @@
+/* Include this file in your html if you are using the CSP mode. */
+@charset "UTF-8";
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+ng\:form {
+  display: block;
+}
+.ng-animate-block-transitions {
+  transition: 0s all!important;
+  -webkit-transition: 0s all!important;
+}
+/* show the element during a show/hide animation when the
+ * animation is ongoing, but the .ng-hide class is active */
+.ng-hide-add-active,
+.ng-hide-remove {
+  display: block!important;
+}
 @font-face {
   font-family: 'FontAwesome';
   src: url('img/fontawesome-webfont.svg') format('svg');
@@ -10,10 +34,15 @@ body {
   font-family: sans-serif;
   cursor: default;
   color: #222222;
+  width: 400px;
+}
+a {
+  color: inherit;
+  text-decoration: underline;
 }
 #settings {
   margin: 0;
-  padding: 0;
+  padding: 0.5em;
   list-style-type: none;
   font-size: 1.3em;
 }
@@ -35,7 +64,14 @@ body {
 #settings label:hover {
   color: inherit;
 }
-.type-icon.html5 {
+.clickable {
+  color: #888888;
+  cursor: pointer;
+}
+.clickable:hover {
+  color: inherit;
+}
+.icon.html5 {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -43,10 +79,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.type-icon.html5::before {
+.icon.html5::before {
   content: '\f13b';
 }
-.type-icon.html4 {
+.icon.html4 {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -54,10 +90,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.type-icon.html4::before {
+.icon.html4::before {
   content: '\f121';
 }
-.type-icon.svg {
+.icon.svg {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -65,10 +101,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.type-icon.svg::before {
+.icon.svg::before {
   content: '\f03e';
 }
-.type-icon.unknown {
+.icon.unknown {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -76,10 +112,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.type-icon.unknown::before {
+.icon.unknown::before {
   content: '\f128';
 }
-.type-icon.obsolete {
+.icon.obsolete {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -87,10 +123,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.type-icon.obsolete::before {
+.icon.obsolete::before {
   content: '\f071';
 }
-.type-icon.draft {
+.icon.draft {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -98,10 +134,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.type-icon.draft::before {
+.icon.draft::before {
   content: '\f0c3';
 }
-.alphabetic-ascending {
+.icon.alphabetic-ascending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -109,10 +145,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.alphabetic-ascending::before {
+.icon.alphabetic-ascending::before {
   content: '\f15d';
 }
-.alphabetic-descending {
+.icon.alphabetic-descending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -120,10 +156,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.alphabetic-descending::before {
+.icon.alphabetic-descending::before {
   content: '\f15e';
 }
-.amount-ascending {
+.icon.amount-ascending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -131,10 +167,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.amount-ascending::before {
+.icon.amount-ascending::before {
   content: '\f160';
 }
-.amount-descending {
+.icon.amount-descending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -142,30 +178,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.amount-descending::before {
+.icon.amount-descending::before {
   content: '\f161';
 }
-.border-left {
-  border-left: 1px solid #d2d2d2;
+.icon.refresh {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon.refresh::before {
+  content: '\f021';
+}
+.sort-icons {
+  font-weight: normal !important;
 }
 table {
   border-spacing: 0;
+  width: 100%;
 }
 table th,
 table td {
   text-align: left;
   padding: 0.7em;
-}
-table .bar-container {
-  width: 130px;
-}
-table .bar-container .bar {
-  background-color: #83bfe6;
-  height: 7px;
-  min-width: 7px;
-  border-radius: 7px;
-  border: 1px solid #83bfe6;
-  box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 0.7) inset;
 }
 table tbody tr:nth-child(even) {
   background-color: #dedede;
@@ -177,15 +214,30 @@ table tbody tr.tag-row:hover {
   background-color: #ff0000;
   color: white;
 }
-table tbody tr.tag-row:hover .border-left {
-  border-left: 1px solid transparent;
+table tbody tr.tag-row:hover .subtle-text {
+  color: inherit;
 }
 table tbody tr.tag-row:hover .bar {
   background-color: white;
   border-color: white;
 }
+.bar-container {
+  width: 100px;
+}
+.bar-container .bar {
+  background-color: #83bfe6;
+  height: 7px;
+  min-width: 7px;
+  border-radius: 7px;
+  border: 1px solid #83bfe6;
+  box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 0.7) inset;
+}
+.border-left {
+  border-left: 1px solid #d2d2d2;
+}
 .subtle-text {
   color: #8a8a8a;
+  font-weight: normal !important;
 }
 code {
   font-weight: bold;

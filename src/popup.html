@@ -8,53 +8,66 @@
     <title>TagCounter</title>
     <link rel="stylesheet" href="popup.css"/>
 </head>
-<body>
-<table ng-controller="TagCounterCtrl">
-    <ul id="settings">
-        <li title="HTML5 elements like <article> and <main>">
-            <input id="html5-checkbox" type="checkbox" class="-tbtn" mg-model="showHtml5Elements" checked />
-            <label for="html5-checkbox"><i class="type-icon html5"></i></label>
-        </li>
-        <li title="Good old HTML4 elements like <p> and <div>">
-            <input id="html4-checkbox" type="checkbox" class="-tbtn" mg-model="showHtml4Elements" />
-            <label for="html4-checkbox"><i class="type-icon html4"></i></label>
-        </li>
-        <li title="SVG elements like <circle> and <rect>">
-            <input id="svg-checkbox" type="checkbox" class="-tbtn" mg-model="showSvgElements" />
-            <label for="svg-checkbox"><i class="type-icon svg"></i></label>
-        </li>
-        <li title="Unknown elements like Angular tags or Web Components">
-            <input id="unknown-checkbox" type="checkbox" class="-tbtn" mg-model="showUnknownElements" />
-            <label for="unknown-checkbox"><i class="type-icon unknown"></i></label>
-        </li>
-        <li title="Obsolete tags like <center> and <applet>">
-            <input id="obsolete-checkbox" type="checkbox" class="-tbtn" mg-model="showObsoleteElements" />
-            <label for="obsolete-checkbox"><i class="type-icon obsolete"></i></label>
-        </li>
-        <li title="W3C draft tags which are experimental">
-            <input id="draft-checkbox" type="checkbox" class="-tbtn" mg-model="showDraftElements" />
-            <label for="draft-checkbox"><i class="type-icon draft"></i></label>
-        </li>
-    </ul>
+<body ng-controller="TagCounterCtrl">
+<ul id="settings">
+    <li title="HTML5 elements like <article> and <main>">
+        <input id="html5-checkbox" type="checkbox" ng-model="showType.html5" />
+        <label for="html5-checkbox"><i class="icon html5"></i></label>
+    </li>
+    <li title="Good old HTML4 elements like <p> and <div>">
+        <input id="html4-checkbox" type="checkbox" ng-model="showType.html4"/>
+        <label for="html4-checkbox"><i class="icon html4"></i></label>
+    </li>
+    <li title="SVG elements like <circle> and <rect>">
+        <input id="svg-checkbox" type="checkbox" ng-model="showType.svg" />
+        <label for="svg-checkbox"><i class="icon svg"></i></label>
+    </li>
+    <li title="Unknown elements like Angular tags or Web Components">
+        <input id="unknown-checkbox" type="checkbox" ng-model="showType.unknown" />
+        <label for="unknown-checkbox"><i class="icon unknown"></i></label>
+    </li>
+    <li title="Obsolete tags like <center> and <applet>">
+        <input id="obsolete-checkbox" type="checkbox" ng-model="showType.obsolete" />
+        <label for="obsolete-checkbox"><i class="icon obsolete"></i></label>
+    </li>
+    <li title="W3C draft tags which are experimental">
+        <input id="draft-checkbox" type="checkbox" ng-model="showType.draft" />
+        <label for="draft-checkbox"><i class="icon draft"></i></label>
+    </li>
+    <li><i class="clickable icon refresh" title="Refresh" ng-click="updateStats()"></i></li>
+</ul>
+
+<table>
     <thead>
     <tr>
         <th>
-            Tags<br/>
-            <span title="Number of unique tags">{{tagNumber}}</span>
-            <i class="type-icon alphabetic-ascending"></i>
+            <span class="clickable" ng-show="sortingComponent === 'name'" class="sort-icons">
+                <i class="icon alphabetic-ascending"   ng-show="!isReversedSort" ng-click="isReversedSort = true"></i>
+                <i class="icon alphabetic-descending" ng-show="isReversedSort"  ng-click="isReversedSort = false"></i>
+            </span>
+            <a href="javascript:void(0)" ng-click="sortingComponent = 'name'" title="Sort by tag name">Tags</a><br/>
+            <span class="subtle-text" title="There are {{tagNumber}} tags in this page">{{tagNumber}}</span>
         </th>
+
         <th class="border-left" colspan="2">
-            Count<br/>
-            <span title="Total number of elements">{{elementNumber}}</span>
-            <i class="type-icon amount-ascending"></i>
+            <span class="clickable" ng-show="sortingComponent === 'freq'" class="sort-icons">
+                <i class="icon amount-ascending"  ng-show="!isReversedSort" ng-click="isReversedSort = true"></i>
+                <i class="icon amount-descending" ng-show="isReversedSort"  ng-click="isReversedSort = false"></i>
+            </span>
+            <a href="javascript:void(0)" ng-click="sortingComponent = 'freq'" title="Sort by tag number">Count</a><br/>
+            <span class="subtle-text" title="There are {{elementNumber}} elements in this page">{{elementNumber}}</span>
         </th>
     </tr>
     </thead>
     <tbody id="table-body">
     <!-- this will be filled in popup.js -->
-    <tr class="tag-row" ng-repeat="tag in tags" ng-mouseenter="highlightTags(tag.name)" ng-mouseleave="unhighlight()" >
+    <tr class="tag-row"
+        ng-repeat="tag in tags | orderBy:sortingComponent:isReversedSort"
+        ng-show="showType.{{tag.type}}"
+        ng-mouseenter="highlightTags(tag.name)"
+        ng-mouseleave="unhighlight()" >
         <th title="{{tag.name}} is a {{tag.type}} tag">
-            <i class="type-icon {{tag.type}} subtle-text"></i>
+            <i class="icon {{tag.type}} subtle-text"></i>
             <code>{{tag.name}}</code>
         </th>
         <td class="border-left" title="There are {{tag.freq}} <{{tag.name}}> tag(s)">

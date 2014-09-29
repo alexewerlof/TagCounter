@@ -48,40 +48,55 @@ app.factory('sendMessage', ['chrome', 'getTabId', function (chrome, getTabId) {
 }]);
 
 app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function ($scope, sendMessage, tagType) {
+    //decides if a tag is visible based on its type
+    $scope.showType = {
+        html5: true,
+        html4: true,
+        svg: true,
+        unknown: true,
+        obsolete: true,
+        draft: true
+    };
     $scope.elementNumber = 0;
     $scope.tagNumber = 0;
+    $scope.sortingComponent = 'name';
+    $scope.isReversedSort = false;
     $scope.tags = [];
-    sendMessage({fname: 'getAllElements'}, function (allElements) {
-        $scope.elementNumber = allElements.length;
+    $scope.updateStats = function () {
+        sendMessage({fname: 'getAllElements'}, function (allElements) {
+            $scope.elementNumber = allElements.length;
 
-        //make an object where keys are tag names and values are frequencies
-        var freq = allElements.reduce(function (o, tagName) {
-            o[tagName] = (o[tagName] | 0 ) + 1;
-            return o;
-        }, {});
+            //make an object where keys are tag names and values are frequencies
+            var freq = allElements.reduce(function (o, tagName) {
+                o[tagName] = (o[tagName] | 0 ) + 1;
+                return o;
+            }, {});
 
-        $scope.tagNumber = Object.keys(freq).length;
+            $scope.tagNumber = Object.keys(freq).length;
 
-        var tags = [];
-        for (var tagName in freq) {
-            if (freq.hasOwnProperty(tagName)) {
-                tags.push({
-                    name: tagName,
-                    freq: freq[tagName],
-                    percent: (100 * freq[tagName] / allElements.length).toFixed(2), //TODO: this line can be optimized
-                    type: tagType(tagName)
-                });
+            var tags = [];
+            for (var tagName in freq) {
+                if (freq.hasOwnProperty(tagName)) {
+                    tags.push({
+                        name: tagName,
+                        freq: freq[tagName],
+                        percent: (100 * freq[tagName] / allElements.length).toFixed(2), //TODO: this line can be optimized
+                        type: tagType(tagName)
+                    });
+                }
             }
-        }
+            $scope.tags = tags;
+            $scope.$apply();
+        });
+    };
 
-        $scope.tags = tags;
-        $scope.$apply();
-        $scope.highlightTags = function (tagName) {
-            sendMessage({fname:'highlightTags', args: [tagName]});
-        };
+    $scope.updateStats();
 
-        $scope.unhighlight = function () {
-            sendMessage({fname:'unhighlight'});
-        };
-    });
+    $scope.highlightTags = function (tagName) {
+        sendMessage({fname:'highlightTags', args: [tagName]});
+    };
+
+    $scope.unhighlight = function () {
+        sendMessage({fname:'unhighlight'});
+    };
 }]);
