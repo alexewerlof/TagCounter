@@ -192,6 +192,28 @@ a {
 .icon.refresh::before {
   content: '\f021';
 }
+.icon.down {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon.down::before {
+  content: '\f0d7';
+}
+.icon.up {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon.up::before {
+  content: '\f0d8';
+}
 .sort-icons {
   font-weight: normal !important;
 }

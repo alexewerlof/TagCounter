@@ -42,20 +42,14 @@
     <thead>
     <tr>
         <th>
-            <span class="clickable" ng-show="sortingComponent === 'name'" class="sort-icons">
-                <i class="icon alphabetic-ascending"   ng-show="!isReversedSort" ng-click="isReversedSort = true"></i>
-                <i class="icon alphabetic-descending" ng-show="isReversedSort"  ng-click="isReversedSort = false"></i>
-            </span>
-            <a href="javascript:void(0)" ng-click="sortingComponent = 'name'" title="Sort by tag name">Tags</a><br/>
+            <a href="javascript:void(0)" ng-click="headerClicked('name')" title="Sort by tag name">Tags</a>
+            <i class="icon" ng-class="isReversedSort ? 'up' : 'down'" ng-show="sortingComponent === 'name'"></i><br/>
             <span class="subtle-text" title="There are {{tagNumber}} tags in this page">{{tagNumber}}</span>
         </th>
 
         <th class="border-left" colspan="2">
-            <span class="clickable" ng-show="sortingComponent === 'freq'" class="sort-icons">
-                <i class="icon amount-ascending"  ng-show="!isReversedSort" ng-click="isReversedSort = true"></i>
-                <i class="icon amount-descending" ng-show="isReversedSort"  ng-click="isReversedSort = false"></i>
-            </span>
-            <a href="javascript:void(0)" ng-click="sortingComponent = 'freq'" title="Sort by tag number">Count</a><br/>
+            <a href="javascript:void(0)" ng-click="headerClicked('freq')" title="Sort by tag number">Count</a>
+            <i class="icon" ng-class="isReversedSort ? 'up' : 'down'" ng-show="sortingComponent === 'freq'"></i><br/>
             <span class="subtle-text" title="There are {{elementNumber}} elements in this page">{{elementNumber}}</span>
         </th>
     </tr>

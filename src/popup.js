@@ -62,6 +62,13 @@ app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function (
     $scope.sortingComponent = 'name';
     $scope.isReversedSort = false;
     $scope.tags = [];
+    $scope.headerClicked = function (header) {
+        if ( $scope.sortingComponent === header ) {
+            $scope.isReversedSort = !$scope.isReversedSort;
+        } else {
+            $scope.sortingComponent = header;
+        }
+    };
     $scope.updateStats = function () {
         sendMessage({fname: 'getAllElements'}, function (allElements) {
             $scope.elementNumber = allElements.length;
