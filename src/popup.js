@@ -49,14 +49,39 @@ app.factory('sendMessage', ['chrome', 'getTabId', function (chrome, getTabId) {
 
 app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function ($scope, sendMessage, tagType) {
     //decides if a tag is visible based on its type
-    $scope.showType = {
-        html5: true,
-        html4: true,
-        svg: true,
-        unknown: true,
-        obsolete: true,
-        draft: true
+    $scope.tagTypes = {
+        html5: {
+            show: true,
+            count: 0,
+            desc: 'HTML5 elements like <article> and <main>'
+        },
+        html4: {
+            show: true,
+            count: 0,
+            desc: 'Good old HTML4 elements like <p> and <div>'
+        },
+        svg: {
+            show: true,
+            count: 0,
+            desc: 'SVG elements like <circle> and <rect>'
+        },
+        unknown: {
+            show: true,
+            count: 0,
+            desc: 'Unknown elements like Angular tags or Web Components'
+        },
+        obsolete: {
+            show: true,
+            count: 0,
+            desc: 'Obsolete tags like <center> and <applet>'
+        },
+        draft: {
+            show: true,
+            count: 0,
+            desc: 'W3C draft tags which are experimental'
+        }
     };
+
     $scope.elementNumber = 0;
     $scope.tagNumber = 0;
     $scope.sortingComponent = 'name';

@@ -1,13 +1,14 @@
 @import "_angular-csp";
 
-@border-color: #d2d2d2;
+@screen-width: 350px;
 @highlight-color: red;
-@disabled-color: #888;
 @bar-height: 7px;
 @bar-color: #83bfe6;
-@fg-color: #222;
-@subtle-fg-color: #8a8a8a;
-@screen-width: 350px;
+@fg-color: #2b2b2b;
+@bg-color: #fff;
+@subtle-fg-color: mix(@fg-color, @bg-color);
+@disabled-color: @subtle-fg-color;
+@border-color: mix(@fg-color, @bg-color, 15%);
 
 @font-face {
   font-family: 'FontAwesome';
@@ -35,6 +36,7 @@ body {
   font-family: sans-serif;
   cursor: default;
   color: @fg-color;
+  background-color: @bg-color;
   width: @screen-width;
 }
 
@@ -43,7 +45,7 @@ a {
   text-decoration: underline;
 }
 
-#settings {
+#toolbar {
   margin: 0;
   padding: 0.5em;
   list-style-type: none;
@@ -55,16 +57,16 @@ a {
     display: inline-block;
   }
 
-  input {
+  input[type=checkbox] {
     display: none;
-
-    &:checked + label {
-      color: @highlight-color;
-    }
   }
 
-  label {
-    .clickable;
+  .toolbar-button {
+    padding: 3px;
+
+    &.selected {
+      color: @highlight-color;
+    }
   }
 }
 
@@ -78,54 +80,54 @@ a {
 }
 
 .icon {
-  &.html5 {
+  &-html5 {
     .fontawesome-icon('\f13b');
   }
-  &.html4 {
+  &-html4 {
     .fontawesome-icon('\f121');
   }
 
-  &.svg {
+  &-svg {
     .fontawesome-icon('\f03e');
   }
 
-  &.unknown {
+  &-unknown {
     .fontawesome-icon('\f128');
   }
 
-  &.obsolete {
+  &-obsolete {
     .fontawesome-icon('\f071');
   }
 
-  &.draft {
+  &-draft {
     .fontawesome-icon('\f0c3');
   }
 
-  &.alphabetic-ascending {
+  &-alphabetic-ascending {
     .fontawesome-icon('\f15d');
   }
 
-  &.alphabetic-descending {
+  &-alphabetic-descending {
     .fontawesome-icon('\f15e');
   }
 
-  &.amount-ascending {
+  &-amount-ascending {
     .fontawesome-icon('\f160');
   }
 
-  &.amount-descending {
+  &-amount-descending {
     .fontawesome-icon('\f161');
   }
 
-  &.refresh {
+  &-refresh {
     .fontawesome-icon('\f021');
   }
 
-  &.down {
+  &-down {
     .fontawesome-icon('\f0d7');
   }
 
-  &.up {
+  &-up {
     .fontawesome-icon('\f0d8');
   }
 }
@@ -146,16 +148,20 @@ table {
 
   tbody tr {
     &:nth-child(even) {
-      background-color: #dedede;
+      background-color: mix(@fg-color, @bg-color, 2%);
     }
 
     &:nth-child(odd) {
-      background-color: #eeeeee;
+      background-color: mix(@fg-color, @bg-color, 6%);
     }
 
     &.tag-row:hover {
       background-color: @highlight-color;
       color: white;
+
+      .border-left {
+        border-color: @highlight-color;
+      }
 
       .subtle-text {
         color: inherit;

@@ -33,45 +33,42 @@ body {
   margin: 1px;
   font-family: sans-serif;
   cursor: default;
-  color: #222222;
+  color: #2b2b2b;
+  background-color: #ffffff;
   width: 350px;
 }
 a {
   color: inherit;
   text-decoration: underline;
 }
-#settings {
+#toolbar {
   margin: 0;
   padding: 0.5em;
   list-style-type: none;
   font-size: 1.3em;
 }
-#settings li {
+#toolbar li {
   margin: 0;
   padding: 0;
   display: inline-block;
 }
-#settings input {
+#toolbar input[type=checkbox] {
   display: none;
 }
-#settings input:checked + label {
+#toolbar .toolbar-button {
+  padding: 3px;
+}
+#toolbar .toolbar-button.selected {
   color: #ff0000;
 }
-#settings label {
-  color: #888888;
-  cursor: pointer;
-}
-#settings label:hover {
-  color: inherit;
-}
 .clickable {
-  color: #888888;
+  color: #959595;
   cursor: pointer;
 }
 .clickable:hover {
   color: inherit;
 }
-.icon.html5 {
+.icon-html5 {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -79,10 +76,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.html5::before {
+.icon-html5::before {
   content: '\f13b';
 }
-.icon.html4 {
+.icon-html4 {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -90,10 +87,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.html4::before {
+.icon-html4::before {
   content: '\f121';
 }
-.icon.svg {
+.icon-svg {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -101,10 +98,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.svg::before {
+.icon-svg::before {
   content: '\f03e';
 }
-.icon.unknown {
+.icon-unknown {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -112,10 +109,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.unknown::before {
+.icon-unknown::before {
   content: '\f128';
 }
-.icon.obsolete {
+.icon-obsolete {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -123,10 +120,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.obsolete::before {
+.icon-obsolete::before {
   content: '\f071';
 }
-.icon.draft {
+.icon-draft {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -134,10 +131,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.draft::before {
+.icon-draft::before {
   content: '\f0c3';
 }
-.icon.alphabetic-ascending {
+.icon-alphabetic-ascending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -145,10 +142,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.alphabetic-ascending::before {
+.icon-alphabetic-ascending::before {
   content: '\f15d';
 }
-.icon.alphabetic-descending {
+.icon-alphabetic-descending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -156,10 +153,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.alphabetic-descending::before {
+.icon-alphabetic-descending::before {
   content: '\f15e';
 }
-.icon.amount-ascending {
+.icon-amount-ascending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -167,10 +164,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.amount-ascending::before {
+.icon-amount-ascending::before {
   content: '\f160';
 }
-.icon.amount-descending {
+.icon-amount-descending {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -178,10 +175,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.amount-descending::before {
+.icon-amount-descending::before {
   content: '\f161';
 }
-.icon.refresh {
+.icon-refresh {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -189,10 +186,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.refresh::before {
+.icon-refresh::before {
   content: '\f021';
 }
-.icon.down {
+.icon-down {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -200,10 +197,10 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.down::before {
+.icon-down::before {
   content: '\f0d7';
 }
-.icon.up {
+.icon-up {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -211,7 +208,7 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon.up::before {
+.icon-up::before {
   content: '\f0d8';
 }
 .sort-icons {
@@ -227,14 +224,17 @@ table td {
   padding: 0.7em;
 }
 table tbody tr:nth-child(even) {
-  background-color: #dedede;
+  background-color: #fbfbfb;
 }
 table tbody tr:nth-child(odd) {
-  background-color: #eeeeee;
+  background-color: #f2f2f2;
 }
 table tbody tr.tag-row:hover {
   background-color: #ff0000;
   color: white;
+}
+table tbody tr.tag-row:hover .border-left {
+  border-color: #ff0000;
 }
 table tbody tr.tag-row:hover .subtle-text {
   color: inherit;
@@ -255,10 +255,10 @@ table tbody tr.tag-row:hover .bar {
   box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 0.7) inset;
 }
 .border-left {
-  border-left: 1px solid #d2d2d2;
+  border-left: 1px solid #dfdfdf;
 }
 .subtle-text {
-  color: #8a8a8a;
+  color: #959595;
   font-weight: normal !important;
 }
 code {

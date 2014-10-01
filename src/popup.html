@@ -9,33 +9,19 @@
     <link rel="stylesheet" href="popup.css"/>
 </head>
 <body ng-controller="TagCounterCtrl">
-<ul id="settings">
-    <li title="HTML5 elements like <article> and <main>">
-        <input id="html5-checkbox" type="checkbox" ng-model="showType.html5" />
-        <label for="html5-checkbox"><i class="icon html5"></i></label>
-    </li>
-    <li title="Good old HTML4 elements like <p> and <div>">
-        <input id="html4-checkbox" type="checkbox" ng-model="showType.html4"/>
-        <label for="html4-checkbox"><i class="icon html4"></i></label>
-    </li>
-    <li title="SVG elements like <circle> and <rect>">
-        <input id="svg-checkbox" type="checkbox" ng-model="showType.svg" />
-        <label for="svg-checkbox"><i class="icon svg"></i></label>
-    </li>
-    <li title="Unknown elements like Angular tags or Web Components">
-        <input id="unknown-checkbox" type="checkbox" ng-model="showType.unknown" />
-        <label for="unknown-checkbox"><i class="icon unknown"></i></label>
-    </li>
-    <li title="Obsolete tags like <center> and <applet>">
-        <input id="obsolete-checkbox" type="checkbox" ng-model="showType.obsolete" />
-        <label for="obsolete-checkbox"><i class="icon obsolete"></i></label>
-    </li>
-    <li title="W3C draft tags which are experimental">
-        <input id="draft-checkbox" type="checkbox" ng-model="showType.draft" />
-        <label for="draft-checkbox"><i class="icon draft"></i></label>
+<ul id="toolbar">
+    <li ng-repeat="(key, value) in tagTypes">
+        <input type="checkbox" ng-model="value.show" />
+        <i class="toolbar-button clickable icon-{{key}}"
+           ng-class="value.show ? 'selected' : 'not-selected'"
+           title="({{value.count}}) {{value.desc}}"></i>
     </li>
     <li>|</li>
-    <li><i class="clickable icon refresh" title="Refresh" ng-click="updateStats()"></i></li>
+    <li>
+        <i class="toolbar-button clickable icon-refresh"
+           ng-click="updateStats()"
+           title="Refresh"></i>
+    </li>
 </ul>
 
 <table>
@@ -43,13 +29,13 @@
     <tr>
         <th>
             <a href="javascript:void(0)" ng-click="headerClicked('name')" title="Sort by tag name">Tags</a>
-            <i class="icon" ng-class="isReversedSort ? 'up' : 'down'" ng-show="sortingComponent === 'name'"></i><br/>
+            <i ng-class="isReversedSort ? 'icon-down' : 'icon-up'" ng-show="sortingComponent === 'name'"></i><br/>
             <span class="subtle-text" title="There are {{tagNumber}} tags in this page">{{tagNumber}}</span>
         </th>
 
         <th class="border-left" colspan="2">
             <a href="javascript:void(0)" ng-click="headerClicked('freq')" title="Sort by tag number">Count</a>
-            <i class="icon" ng-class="isReversedSort ? 'up' : 'down'" ng-show="sortingComponent === 'freq'"></i><br/>
+            <i ng-class="isReversedSort ? 'icon-down' : 'icon-up'" ng-show="sortingComponent === 'freq'"></i><br/>
             <span class="subtle-text" title="There are {{elementNumber}} elements in this page">{{elementNumber}}</span>
         </th>
     </tr>
@@ -58,7 +44,7 @@
     <!-- this will be filled in popup.js -->
     <tr class="tag-row"
         ng-repeat="tag in tags | orderBy:sortingComponent:isReversedSort"
-        ng-show="showType.{{tag.type}}"
+        ng-show="tagTypes.{{tag.type}}.show"
         ng-mouseenter="highlightTags(tag.name)"
         ng-mouseleave="unhighlight()" >
         <th title="{{tag.name}} is a {{tag.type}} tag">
