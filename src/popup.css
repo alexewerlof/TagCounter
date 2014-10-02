@@ -40,6 +40,7 @@ body {
 a {
   color: inherit;
   text-decoration: underline;
+  cursor: pointer;
 }
 #toolbar {
   margin: 0;
@@ -57,16 +58,14 @@ a {
 }
 #toolbar .toolbar-button {
   padding: 3px;
-}
-#toolbar .toolbar-button.selected {
-  color: #ff0000;
-}
-.clickable {
   color: #959595;
   cursor: pointer;
 }
-.clickable:hover {
+#toolbar .toolbar-button:hover {
   color: inherit;
+}
+#toolbar .toolbar-button.selected {
+  color: #ff0000;
 }
 .icon-html5 {
   display: inline-block;

@@ -11,14 +11,16 @@
 <body ng-controller="TagCounterCtrl">
 <ul id="toolbar">
     <li ng-repeat="(key, value) in tagTypes">
-        <input type="checkbox" ng-model="value.show" />
-        <i class="toolbar-button clickable icon-{{key}}"
-           ng-class="value.show ? 'selected' : 'not-selected'"
-           title="({{value.count}}) {{value.desc}}"></i>
+        <label>
+            <input type="checkbox" ng-model="value.show" />
+            <i class="toolbar-button icon-{{key}}"
+               ng-class="value.show ? 'selected' : 'not-selected'"
+               title="{{value.desc}}"></i>
+        </label>
     </li>
     <li>|</li>
     <li>
-        <i class="toolbar-button clickable icon-refresh"
+        <i class="toolbar-button icon-refresh"
            ng-click="updateStats()"
            title="Refresh"></i>
     </li>
@@ -46,7 +48,7 @@
         ng-repeat="tag in tags | orderBy:sortingComponent:isReversedSort"
         ng-show="tagTypes.{{tag.type}}.show"
         ng-mouseenter="highlightTags(tag.name)"
-        ng-mouseleave="unhighlight()" >
+        ng-mouseleave="unhighlight()">
         <th title="{{tag.name}} is a {{tag.type}} tag">
             <i class="icon-{{tag.type}} subtle-text"></i>
             <code>{{tag.name}}</code>

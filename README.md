@@ -7,7 +7,7 @@ It only counts the tags when you explicitly ask. Therefore it's not going to aff
 It's open source. See the source code on Github: https://github.com/hanifbbz/TagCounter
 
 #How does it work?
-It injects a tiny script (less than 0.6 KB) into the page. When it is ready it shows a little <n> icon on the address bar. If you click that little icon the script will count the tags and show the statistics. When you hover over any tag in the statistics page it will highlight all those elements.
+It injects a tiny script (around 0.6 KB) into the page. When it is ready it shows a little <n> icon on the address bar. If you click that little icon the script will count the tags and show the statistics. When you hover over any tag in the statistics page it will highlight all those elements.
 
 #Available on WebStore
 See it on [WebStore] (https://chrome.google.com/webstore/detail/tagcounter/okjmidhcodkplbehcomejnfjlkbdnjlg)
@@ -18,7 +18,6 @@ See it on [WebStore] (https://chrome.google.com/webstore/detail/tagcounter/okjmi
 
 * Remember the sorting settings in each execution
 * Edit TagCounter's description on Google Chrome WebStore so that it is mentioned that it works with Web Components and SVG tags
-* Publish the logo on Dribbble
 * Allow the user to select an element to get the stats only for that element and its children
 * Better messaging by using the i18n
 * Use the all_frames from https://developer.chrome.com/extensions/content_scripts to count tags from all frames
@@ -39,6 +38,7 @@ Y Investigate if it's possible to shrink TagCounter-content-script.js even more
 Y Rename counter.js to tagcounter.js for identification
 Y Add CSS to the table
 Y How to manage big tables? Scroll.
+C Publish the logo on Dribbble
 C Count the number of attributes and text nodes and comment nodes too?
 C Use badge to show number of tags
 C Use a "busy" cursor when the page is being analyzed

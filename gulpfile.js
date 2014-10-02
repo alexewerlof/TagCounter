@@ -1,11 +1,9 @@
-var gulp = require('gulp');
-
-//include plug-ins
-var pkg = require('./package.json');
-var uglify = require('gulp-uglify');
-var clean = require('gulp-clean');
 var zip = require('gulp-zip');
+var pkg = require('./package.json');
+var gulp = require('gulp');
 var size = require('gulp-size');
+var clean = require('gulp-clean');
+var uglify = require('gulp-uglify');
 var jeditor = require("gulp-json-editor");
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
@@ -26,7 +24,7 @@ gulp.task('clean', function () {
 });
 
 //overwrites the name, description and version in manifest.json from package.json
-gulp.task('manifest', function () {
+gulp.task('build-manifest', function () {
     'use strict';
 
     return gulp.src(path.src + "manifest.json")
@@ -40,7 +38,7 @@ gulp.task('manifest', function () {
 });
 
 // minify javascripts
-gulp.task('minify-js', function () {
+gulp.task('build-js', function () {
     'use strict';
 
     return gulp.src([path.src + '*.js'])
@@ -50,7 +48,7 @@ gulp.task('minify-js', function () {
 });
 
 //minify html files
-gulp.task('minify-html', function () {
+gulp.task('build-html', function () {
     'use strict';
 
     return gulp.src(path.src + '*.html')
@@ -59,7 +57,7 @@ gulp.task('minify-html', function () {
 });
 
 //minify css files
-gulp.task('minify-css', function () {
+gulp.task('build-css', function () {
     'use strict';
 
     return gulp.src(path.src + '*.css')
@@ -68,7 +66,7 @@ gulp.task('minify-css', function () {
 });
 
 //copy the image files
-gulp.task('copy-img', function () {
+gulp.task('build-img', function () {
     'use strict';
 
     return gulp.src(path.src + 'img/**/*', { base: './src' })
@@ -76,15 +74,13 @@ gulp.task('copy-img', function () {
 });
 
 //populate the build folder
-gulp.task('build', ['manifest', 'minify-js', 'minify-html', 'minify-css', 'copy-img'], function () {
-});
+gulp.task('build', ['build-manifest', 'build-js', 'build-html', 'build-css', 'build-img']);
 
-gulp.task('dist', ['build'], function () {
+gulp.task('release', ['build'], function () {
     return gulp.src(path.build + '**')
         .pipe(zip(pkg.name + '-' + pkg.version + '.zip'))
         .pipe(gulp.dest(path.release));
 });
 
 //zip the build folder ready to upload to WebStore
-gulp.task('default', ['build'], function () {
-});
+gulp.task('default', ['build']);

@@ -43,6 +43,7 @@ body {
 a {
   color: inherit;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #toolbar {
@@ -63,19 +64,16 @@ a {
 
   .toolbar-button {
     padding: 3px;
+    color: @disabled-color;
+    cursor: pointer;
+
+    &:hover {
+      color: inherit;
+    }
 
     &.selected {
       color: @highlight-color;
     }
-  }
-}
-
-.clickable {
-  color: @disabled-color;
-  cursor: pointer;
-
-  &:hover {
-    color: inherit;
   }
 }
 
