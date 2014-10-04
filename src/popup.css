@@ -246,6 +246,8 @@ table tbody tr.tag-row:hover .bar {
   width: 100px;
 }
 .bar-container .bar {
+  width: 0%;
+  transition: width 1s;
   background-color: #83bfe6;
   height: 7px;
   min-width: 7px;
@@ -263,4 +265,26 @@ table tbody tr.tag-row:hover .bar {
 code {
   font-weight: bold;
   font-family: inherit;
+}
+code:before {
+  content: '<';
+}
+code:after {
+  content: '>';
+}
+.tag-row {
+  -webkittransition: opacity 1s;
+  transition: opacity 1s;
+}
+.tag-row.ng-enter {
+  opacity: 0;
+}
+.tag-row.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.tag-row.ng-leave {
+  opacity: 1;
+}
+.tag-row.ng-leave.ng-leave-active {
+  opacity: 0;
 }

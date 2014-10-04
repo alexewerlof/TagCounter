@@ -1,5 +1,5 @@
 /*global chrome*/
-var app = angular.module('popup', []);
+var app = angular.module('popup', ['ngAnimate']);
 
 app.constant('chrome', chrome);
 app.constant('chromea', {
@@ -123,6 +123,10 @@ app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function (
     };
 
     $scope.updateStats();
+
+    $scope.isTagShown = function (tag, index) {
+        return $scope.tagTypes[tag.type].show;
+    };
 
     $scope.highlightTags = function (tagName) {
         sendMessage({fname:'highlightTags', args: [tagName]});

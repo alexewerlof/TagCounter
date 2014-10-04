@@ -177,6 +177,8 @@ table {
   width: 100px;
 
   .bar {
+    width: 0%; // the width will adjust the progress bar
+    transition: width 1s;
     background-color: @bar-color;
     height: @bar-height;
     min-width: @bar-height;
@@ -198,4 +200,31 @@ table {
 code {
   font-weight: bold;
   font-family: inherit;
+  &:before {
+    content: '<';
+  }
+  &:after {
+    content: '>';
+  }
+}
+
+.tag-row {
+  -webkittransition: opacity 1s;
+  transition: opacity 1s;
+
+  &.ng-enter {
+    opacity: 0;
+
+    &.ng-enter-active {
+      opacity: 1;
+    }
+  }
+
+  &.ng-leave {
+    opacity: 1;
+
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
 }
