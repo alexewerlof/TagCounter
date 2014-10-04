@@ -209,10 +209,10 @@ code {
 }
 
 .tag-row {
-  -webkittransition: opacity 1s;
-  transition: opacity 1s;
 
   &.ng-enter {
+    -webkittransition: opacity 0.5s;
+    transition: opacity 0.5s;
     opacity: 0;
 
     &.ng-enter-active {
@@ -221,6 +221,8 @@ code {
   }
 
   &.ng-leave {
+    -webkittransition: opacity 0.2s;
+    transition: opacity 0.2s;
     opacity: 1;
 
     &.ng-leave-active {

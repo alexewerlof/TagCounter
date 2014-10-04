@@ -272,17 +272,17 @@ code:before {
 code:after {
   content: '>';
 }
-.tag-row {
-  -webkittransition: opacity 1s;
-  transition: opacity 1s;
-}
 .tag-row.ng-enter {
+  -webkittransition: opacity 0.5s;
+  transition: opacity 0.5s;
   opacity: 0;
 }
 .tag-row.ng-enter.ng-enter-active {
   opacity: 1;
 }
 .tag-row.ng-leave {
+  -webkittransition: opacity 0.2s;
+  transition: opacity 0.2s;
   opacity: 1;
 }
 .tag-row.ng-leave.ng-leave-active {
