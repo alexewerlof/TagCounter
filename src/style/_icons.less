@@ -1,0 +1,72 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../img/fontawesome-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fontawesome-icon(@code) {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &::before {
+    content: @code;
+  }
+}
+
+.icon {
+  &-html5 {
+    .fontawesome-icon('\f13b');
+  }
+  &-html4 {
+    .fontawesome-icon('\f121');
+  }
+
+  &-svg {
+    .fontawesome-icon('\f03e');
+  }
+
+  &-unknown {
+    .fontawesome-icon('\f128');
+  }
+
+  &-obsolete {
+    .fontawesome-icon('\f071');
+  }
+
+  &-draft {
+    .fontawesome-icon('\f0c3');
+  }
+
+  &-alphabetic-ascending {
+    .fontawesome-icon('\f15d');
+  }
+
+  &-alphabetic-descending {
+    .fontawesome-icon('\f15e');
+  }
+
+  &-amount-ascending {
+    .fontawesome-icon('\f160');
+  }
+
+  &-amount-descending {
+    .fontawesome-icon('\f161');
+  }
+
+  &-refresh {
+    .fontawesome-icon('\f021');
+  }
+
+  &-down {
+    .fontawesome-icon('\f0d7');
+  }
+
+  &-up {
+    .fontawesome-icon('\f0d8');
+  }
+}

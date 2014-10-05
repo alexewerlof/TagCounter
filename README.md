@@ -14,8 +14,10 @@ See it on [WebStore] (https://chrome.google.com/webstore/detail/tagcounter/okjmi
 
 #Ideas
 
-(C: Canceled, Y: Yes, D: Doing, *: To be decided)
+(C: Canceled, Y: Yes we have it, D: Doing, *: To be decided)
 
+D Source code is growing re-organize it
+* Add Jasmine tests
 * Remember the sorting settings in each execution
 * Edit TagCounter's description on Google Chrome WebStore so that it is mentioned that it works with Web Components and SVG tags
 * Allow the user to select an element to get the stats only for that element and its children

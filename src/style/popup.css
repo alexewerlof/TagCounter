@@ -1,71 +1,9 @@
-/* Include this file in your html if you are using the CSP mode. */
-@charset "UTF-8";
-[ng\:cloak],
-[ng-cloak],
-[data-ng-cloak],
-[x-ng-cloak],
-.ng-cloak,
-.x-ng-cloak,
-.ng-hide {
-  display: none !important;
-}
-ng\:form {
-  display: block;
-}
-.ng-animate-block-transitions {
-  transition: 0s all!important;
-  -webkit-transition: 0s all!important;
-}
-/* show the element during a show/hide animation when the
- * animation is ongoing, but the .ng-hide class is active */
-.ng-hide-add-active,
-.ng-hide-remove {
-  display: block!important;
-}
+/** this is a mixin that adds Angular animations to an element */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('img/fontawesome-webfont.svg') format('svg');
+  src: url('../img/fontawesome-webfont.svg') format('svg');
   font-weight: normal;
   font-style: normal;
-}
-body {
-  font-size: 11px;
-  margin: 1px;
-  font-family: sans-serif;
-  cursor: default;
-  color: #2b2b2b;
-  background-color: #ffffff;
-  width: 350px;
-}
-a {
-  color: inherit;
-  text-decoration: underline;
-  cursor: pointer;
-}
-#toolbar {
-  margin: 0;
-  padding: 0.5em;
-  list-style-type: none;
-  font-size: 1.3em;
-}
-#toolbar li {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-}
-#toolbar input[type=checkbox] {
-  display: none;
-}
-#toolbar .toolbar-button {
-  padding: 3px;
-  color: #959595;
-  cursor: pointer;
-}
-#toolbar .toolbar-button:hover {
-  color: inherit;
-}
-#toolbar .toolbar-button.selected {
-  color: #ff0000;
 }
 .icon-html5 {
   display: inline-block;
@@ -210,6 +148,80 @@ a {
 .icon-up::before {
   content: '\f0d8';
 }
+/* Include this file in your html if you are using the CSP mode. */
+@charset "UTF-8";
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+ng\:form {
+  display: block;
+}
+.ng-animate-block-transitions {
+  transition: 0s all!important;
+  -webkit-transition: 0s all!important;
+}
+/* show the element during a show/hide animation when the
+ * animation is ongoing, but the .ng-hide class is active */
+.ng-hide-add-active,
+.ng-hide-remove {
+  display: block!important;
+}
+body {
+  font-size: 11px;
+  margin: 1px;
+  font-family: sans-serif;
+  cursor: default;
+  color: #2b2b2b;
+  background-color: #ffffff;
+  width: 350px;
+}
+a {
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.subtle-text {
+  color: #959595;
+  font-weight: normal !important;
+}
+#toolbar {
+  margin: 0;
+  padding: 0.5em;
+  list-style-type: none;
+  font-size: 1.3em;
+  text-align: right;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#toolbar li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+#toolbar input[type=checkbox] {
+  display: none;
+}
+#toolbar .toolbar-button {
+  padding: 3px;
+  color: #959595;
+  cursor: pointer;
+}
+#toolbar .toolbar-button:hover {
+  color: inherit;
+}
+#toolbar .toolbar-button.selected {
+  color: #ff0000;
+}
 .sort-icons {
   font-weight: normal !important;
 }
@@ -257,10 +269,6 @@ table tbody tr.tag-row:hover .bar {
 }
 .border-left {
   border-left: 1px solid #dfdfdf;
-}
-.subtle-text {
-  color: #959595;
-  font-weight: normal !important;
 }
 code {
   font-weight: bold;

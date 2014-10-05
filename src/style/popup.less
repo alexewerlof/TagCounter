@@ -1,0 +1,135 @@
+@import "_variables";
+@import "_mixins";
+@import "_icons";
+@import "_angular-csp";
+
+body {
+  font-size: 11px;
+  margin: 1px;
+  font-family: sans-serif;
+  cursor: default;
+  color: @fg-color;
+  background-color: @bg-color;
+  width: @screen-width;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.subtle-text {
+  color: @subtle-fg-color;
+  font-weight: normal !important;;
+}
+
+#toolbar {
+  margin: 0;
+  padding: 0.5em;
+  list-style-type: none;
+  font-size: 1.3em;
+  text-align: right;
+  .noselect();
+
+  li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+  }
+
+  input[type=checkbox] {
+    display: none;
+  }
+
+  .toolbar-button {
+    padding: 3px;
+    color: @disabled-color;
+    cursor: pointer;
+
+    &:hover {
+      color: inherit;
+    }
+
+    &.selected {
+      color: @highlight-color;
+    }
+  }
+}
+
+.sort-icons {
+  font-weight: normal !important;
+}
+
+table {
+  border-spacing: 0;
+  width: 100%;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.7em;
+  }
+
+  tbody tr {
+    &:nth-child(even) {
+      background-color: mix(@fg-color, @bg-color, 2%);
+    }
+
+    &:nth-child(odd) {
+      background-color: mix(@fg-color, @bg-color, 6%);
+    }
+
+    &.tag-row:hover {
+      background-color: @highlight-color;
+      color: white;
+
+      .border-left {
+        border-color: @highlight-color;
+      }
+
+      .subtle-text {
+        color: inherit;
+      }
+
+      .bar {
+        background-color: white;
+        border-color: white;
+      }
+    }
+  }
+}
+
+.bar-container {
+  width: 100px;
+
+  .bar {
+    width: 0%; // the width will adjust the progress bar
+    transition: width 1s;
+    background-color: @bar-color;
+    height: @bar-height;
+    min-width: @bar-height;
+    border-radius: @bar-height;
+    border: 1px solid @bar-color;
+    box-shadow: 0 1px 1px 0px fade(#fff, 70%) inset;
+  }
+}
+
+.border-left {
+  border-left: 1px solid @border-color;
+}
+
+code {
+  font-weight: bold;
+  font-family: inherit;
+  &:before {
+    content: '<';
+  }
+  &:after {
+    content: '>';
+  }
+}
+
+.tag-row {
+  .ng-anim(color, enter, @fg-color, leave, @disabled-color, 300ms);
+}
