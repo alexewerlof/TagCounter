@@ -209,30 +209,30 @@ code {
 }
 
 .ng-anim(@prop, @on-verb, @on-value, @off-verb, @off-value, @len) {
-  -webkittransition: @prop 0;
-  transition: @prop 0;
+  -webkittransition: @prop none;
+  transition: @prop none;
 
   &.ng-@{on-verb} {
     -webkittransition: @prop @len;
     transition: @prop @len;
-    @{prop}: @off-value;
+    @{prop}: @off-value !important;
 
     &.ng-@{on-verb}-active {
-      @{prop}: @on-value;
+      @{prop}: @on-value !important;
     }
   }
 
   &.ng-@{off-verb} {
     -webkittransition: @prop @len;
     transition: @prop @len;
-    @{prop}: @on-value;
+    @{prop}: @on-value !important;
 
-  }
-  &.ng-@{off-verb} {
-    @{prop}: @off-value;
+    &.ng-@{off-verb}-active {
+      @{prop}: @off-value !important;
+    }
   }
 }
 
 .tag-row {
-  .ng-anim(opacity, enter, 1, leave, 0, 200ms);
+  .ng-anim(color, enter, @fg-color, leave, @disabled-color, 300ms);
 }

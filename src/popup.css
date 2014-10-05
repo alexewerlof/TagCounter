@@ -273,22 +273,22 @@ code:after {
   content: '>';
 }
 .tag-row {
-  -webkittransition: opacity 0;
-  transition: opacity 0;
+  -webkittransition: color none;
+  transition: color none;
 }
 .tag-row.ng-enter {
-  -webkittransition: opacity 200ms;
-  transition: opacity 200ms;
-  opacity: 0;
+  -webkittransition: color 300ms;
+  transition: color 300ms;
+  color: #959595 !important;
 }
 .tag-row.ng-enter.ng-enter-active {
-  opacity: 1;
+  color: #2b2b2b !important;
 }
 .tag-row.ng-leave {
-  -webkittransition: opacity 200ms;
-  transition: opacity 200ms;
-  opacity: 1;
+  -webkittransition: color 300ms;
+  transition: color 300ms;
+  color: #2b2b2b !important;
 }
-.tag-row.ng-leave {
-  opacity: 0;
+.tag-row.ng-leave.ng-leave-active {
+  color: #959595 !important;
 }
