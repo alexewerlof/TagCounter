@@ -11,9 +11,9 @@ var jsonminify = require('gulp-jsonminify');
 
 // Paths
 var path = {
-    src : './src/',
-    build : './build/',
-    release : './release/'
+    src : './src',
+    build : './build',
+    release : './release'
 };
 
 //clean up the build directory
@@ -27,11 +27,11 @@ gulp.task('clean', function () {
 gulp.task('build-manifest', function () {
     'use strict';
 
-    return gulp.src(path.src + "manifest.json")
+    return gulp.src(path.src + '/manifest.json')
         .pipe(jeditor({
-            description: pkg.description,
+            description: pkg['description'],
             name: pkg.name,
-            version: pkg.version
+            version: pkg['version']
         }))
         .pipe(jsonminify())
         .pipe(gulp.dest(path.build));
@@ -41,7 +41,7 @@ gulp.task('build-manifest', function () {
 gulp.task('build-js', function () {
     'use strict';
 
-    return gulp.src([path.src + '*.js'])
+    return gulp.src([path.src + '/**/*.js'])
         .pipe(uglify())
         .pipe(gulp.dest(path.build))
         .pipe(size({showFiles: true}));
@@ -51,7 +51,7 @@ gulp.task('build-js', function () {
 gulp.task('build-html', function () {
     'use strict';
 
-    return gulp.src(path.src + '*.html')
+    return gulp.src(path.src + '/**/*.html')
         .pipe(minifyHTML())
         .pipe(gulp.dest(path.build));
 });
@@ -60,7 +60,7 @@ gulp.task('build-html', function () {
 gulp.task('build-css', function () {
     'use strict';
 
-    return gulp.src(path.src + '*.css')
+    return gulp.src(path.src + '/**/*.css')
         .pipe(minifyCSS())
         .pipe(gulp.dest(path.build));
 });
