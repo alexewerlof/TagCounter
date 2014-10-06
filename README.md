@@ -6,6 +6,7 @@ With the increasing popularity of Angular directives and Web Components everyone
 
  * Shows the list and total number of tags used to build the page
  * Shows total number of elements used to build the page
+ * You can sort the stats by name and number
  * Counts how many of each tag was used
  * It's easy to refresh the stats for dynamically changing pages
  * Identifies standard tag types for HTML 5, HTML 4, SVG, and even W3C drafts
