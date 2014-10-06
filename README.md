@@ -17,3 +17,7 @@ With the increasing popularity of Angular directives and Web Components everyone
 
 ##How does it work?
 It injects a tiny script (less than 0.7 KB) into the page. When it is ready it shows a little <n> icon on the address bar. Only when you click that little icon the script counts the tags and shows the statistics table.
+
+##Developer
+
+Alex Ewerlöf (@alexewerlof)
