@@ -2,6 +2,7 @@
 @font-face {
   font-family: 'FontAwesome';
   src: url('../img/fontawesome-webfont.svg') format('svg');
+  src: url('fontawesome-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

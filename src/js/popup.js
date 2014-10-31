@@ -1,5 +1,5 @@
 /*global chrome*/
-var app = angular.module('popup', ['ngAnimate']);
+var app = angular.module('popup', []);
 
 app.constant('chrome', chrome);
 app.constant('chromea', {
@@ -84,8 +84,8 @@ app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function (
 
     $scope.elementNumber = 0;
     $scope.tagNumber = 0;
-    $scope.sortingComponent = 'name';
-    $scope.isReversedSort = false;
+    $scope.sortingComponent = 'freq';
+    $scope.isReversedSort = true;
     $scope.tags = [];
     $scope.headerClicked = function (header) {
         if ( $scope.sortingComponent === header ) {

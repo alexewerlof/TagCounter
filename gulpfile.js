@@ -69,12 +69,20 @@ gulp.task('build-css', function () {
 gulp.task('build-img', function () {
     'use strict';
 
-    return gulp.src(path.src + '/img/**/*', { base: './src' })
+    return gulp.src(path.src + '/img/**/*', { base: path.src })
+        .pipe(gulp.dest(path.build));
+});
+
+//copy the font
+gulp.task('build-font', function () {
+    'use strict';
+
+    return gulp.src(path.src + '/style/fontawesome-webfont.woff', { base: path.src })
         .pipe(gulp.dest(path.build));
 });
 
 //populate the build folder
-gulp.task('build', ['build-manifest', 'build-js', 'build-html', 'build-css', 'build-img']);
+gulp.task('build', ['build-manifest', 'build-js', 'build-html', 'build-css', 'build-font', 'build-img']);
 
 gulp.task('release', ['build'], function () {
     return gulp.src(path.build + '/**')
