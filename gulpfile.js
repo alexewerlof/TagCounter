@@ -69,7 +69,7 @@ gulp.task('build-css', function () {
 gulp.task('build-img', function () {
     'use strict';
 
-    return gulp.src(path.src + 'img/**/*', { base: './src' })
+    return gulp.src(path.src + '/img/**/*', { base: './src' })
         .pipe(gulp.dest(path.build));
 });
 
@@ -77,9 +77,10 @@ gulp.task('build-img', function () {
 gulp.task('build', ['build-manifest', 'build-js', 'build-html', 'build-css', 'build-img']);
 
 gulp.task('release', ['build'], function () {
-    return gulp.src(path.build + '**')
+    return gulp.src(path.build + '/**')
         .pipe(zip(pkg.name + '-' + pkg.version + '.zip'))
-        .pipe(gulp.dest(path.release));
+        .pipe(gulp.dest(path.release))
+        .pipe(size({showFiles: true}));
 });
 
 //zip the build folder ready to upload to WebStore
