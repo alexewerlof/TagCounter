@@ -27,40 +27,74 @@
 </ul>
 
 <table>
+    <colgroup>
+        <col class="tag-col">
+        <col class="count-col">
+        <col class="grid-col" span="4">
+    </colgroup>
     <thead>
     <tr>
         <th>
             <a href="javascript:void(0)" ng-click="headerClicked('name')" title="Sort by tag name">Tags</a>
             <i ng-class="isReversedSort ? 'icon-down' : 'icon-up'" ng-show="sortingComponent === 'name'"></i><br/>
-            <span class="subtle-text" title="There are {{tagNumber}} tags in this page">{{tagNumber}}</span>
         </th>
 
-        <th class="border-left" colspan="2">
+        <th colspan="5"
+            class="border-left">
             <a href="javascript:void(0)" ng-click="headerClicked('freq')" title="Sort by tag number">Count</a>
             <i ng-class="isReversedSort ? 'icon-down' : 'icon-up'" ng-show="sortingComponent === 'freq'"></i><br/>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <span class="subtle-text" title="There are {{tagNumber}} tags in this page">{{tagNumber}}</span>
+        </th>
+        <th class="border-left">
             <span class="subtle-text" title="There are {{elementNumber}} elements in this page">{{elementNumber}}</span>
+        </th>
+        <th class="grid-number subtle-text">
+            25%
+        </th>
+        <th class="grid-number subtle-text">
+            50%
+        </th>
+        <th class="grid-number subtle-text">
+            75%
+        </th>
+        <th class="grid-number subtle-text">
+            100%
         </th>
     </tr>
     </thead>
-    <tbody id="table-body">
     <!-- this will be filled in popup.js -->
-    <tr class="tag-row"
-        ng-repeat="tag in tags | filter: isTagShown | orderBy:sortingComponent:isReversedSort"
-        ng-mouseenter="highlightTags(tag.name)"
-        ng-mouseleave="unhighlight()">
-        <th title="{{tag.name}} is a {{tag.type}} tag">
-            <i class="icon-{{tag.type}} subtle-text"></i>
-            <code>{{tag.name}}</code>
-        </th>
-        <td class="border-left" title="There are {{tag.freq}} <{{tag.name}}> tag(s)">
-            {{tag.freq}}
-        </td>
-        <td class="border-left" title="{{tag.percent}}% of all page elements are <{{tag.name}}>">
-            <div class="bar-container">
-                <div class="bar" style="width:{{tag.percent}}%;"></div>
-            </div>
-        </td>
-    </tr>
+    <tbody ng-repeat="tag in tags | filter: isTagShown | orderBy:sortingComponent:isReversedSort">
+        <tr class="tag-row">
+            <th rowspan="2"
+                class="highlight-on-hover"
+                ng-mouseenter="highlightTags(tag.name)"
+                ng-mouseleave="unhighlight()">
+                <i class="icon-{{tag.type}} subtle-text"
+                    title="{{tag.type}} tag"></i>
+                <code>{{tag.name}}</code>
+            </th>
+            <td rowspan="2"
+                class="border-left">
+                {{tag.freq}}
+            </td>
+            <td class="border-right"></td>
+            <td class="border-right"></td>
+            <td class="border-right"></td>
+            <td class="border-right"></td>
+        </tr>
+        <tr>
+            <td colspan="4"
+                class="bar-cell">
+                <div class="bar-container"
+                     title="{{tag.percent}}%">
+                    <div class="bar" style="width:{{tag.percent}}%;"></div>
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>
 </body>

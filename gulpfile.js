@@ -24,7 +24,7 @@ gulp.task('clean', function () {
 });
 
 //overwrites the name, description and version in manifest.json from package.json
-gulp.task('build-manifest', function () {
+gulp.task('build:manifest', function () {
     'use strict';
 
     return gulp.src(path.src + '/manifest.json')
@@ -38,7 +38,7 @@ gulp.task('build-manifest', function () {
 });
 
 // minify javascripts
-gulp.task('build-js', function () {
+gulp.task('build:js', function () {
     'use strict';
 
     return gulp.src([path.src + '/**/*.js'])
@@ -48,7 +48,7 @@ gulp.task('build-js', function () {
 });
 
 //minify html files
-gulp.task('build-html', function () {
+gulp.task('build:html', function () {
     'use strict';
 
     return gulp.src(path.src + '/**/*.html')
@@ -57,16 +57,16 @@ gulp.task('build-html', function () {
 });
 
 //minify css files
-gulp.task('build-css', function () {
+gulp.task('build:css', function () {
     'use strict';
 
-    return gulp.src(path.src + '/**/*.css')
+    return gulp.src([path.src + '/**/*.css', '!/**/_*'])
         .pipe(minifyCSS())
         .pipe(gulp.dest(path.build));
 });
 
 //copy the image files
-gulp.task('build-img', function () {
+gulp.task('build:img', function () {
     'use strict';
 
     return gulp.src(path.src + '/img/**/*', { base: path.src })
@@ -74,7 +74,7 @@ gulp.task('build-img', function () {
 });
 
 //copy the font
-gulp.task('build-font', function () {
+gulp.task('build:font', function () {
     'use strict';
 
     return gulp.src(path.src + '/style/fontawesome-webfont.woff', { base: path.src })
@@ -82,11 +82,11 @@ gulp.task('build-font', function () {
 });
 
 //populate the build folder
-gulp.task('build', ['build-manifest', 'build-js', 'build-html', 'build-css', 'build-font', 'build-img']);
+gulp.task('build', ['build:manifest', 'build:js', 'build:html', 'build:css', 'build:font', 'build:img']);
 
 gulp.task('release', ['build'], function () {
     return gulp.src(path.build + '/**')
-        .pipe(zip(pkg.name + '-' + pkg.version + '.zip'))
+        .pipe(zip(pkg.name + '-' + pkg['version'] + '.zip'))
         .pipe(gulp.dest(path.release))
         .pipe(size({showFiles: true}));
 });

@@ -1,7 +1,7 @@
+@charset "UTF-8";
 /** this is a mixin that adds Angular animations to an element */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../img/fontawesome-webfont.svg') format('svg');
   src: url('fontawesome-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
@@ -150,7 +150,6 @@
   content: '\f0d8';
 }
 /* Include this file in your html if you are using the CSP mode. */
-@charset "UTF-8";
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
@@ -180,7 +179,6 @@ body {
   cursor: default;
   color: #2b2b2b;
   background-color: #ffffff;
-  width: 350px;
 }
 a {
   color: inherit;
@@ -228,48 +226,71 @@ a {
 }
 table {
   border-spacing: 0;
-  width: 100%;
+  width: 350px;
+  table-layout: fixed;
 }
-table th,
-table td {
+table .tag-col {
+  width: 170px;
+}
+table .count-col {
+  width: 50px;
+}
+table .grid-col {
+  width: 50px;
+}
+table thead th,
+table tbody th,
+table thead td,
+table tbody td {
   text-align: left;
-  padding: 0.7em;
+  padding: 0.3em;
 }
-table tbody tr:nth-child(even) {
+table tbody {
+  position: relative;
+}
+table tbody:nth-child(even) {
   background-color: #fbfbfb;
 }
-table tbody tr:nth-child(odd) {
+table tbody:nth-child(odd) {
   background-color: #f2f2f2;
 }
-table tbody tr.tag-row:hover {
-  background-color: #ff0000;
-  color: white;
+.highlight-on-hover {
+  border: 1px solid transparent;
 }
-table tbody tr.tag-row:hover .border-left {
+.highlight-on-hover:hover {
   border-color: #ff0000;
 }
-table tbody tr.tag-row:hover .subtle-text {
-  color: inherit;
-}
-table tbody tr.tag-row:hover .bar {
-  background-color: white;
-  border-color: white;
+.bar-cell {
+  position: relative;
+  height: 0;
+  font-size: 0;
 }
 .bar-container {
-  width: 100px;
+  width: 100%;
+  position: absolute;
+  top: -15px;
 }
 .bar-container .bar {
   width: 0%;
   transition: width 1s;
-  background-color: #83bfe6;
-  height: 7px;
-  min-width: 7px;
-  border-radius: 7px;
-  border: 1px solid #83bfe6;
-  box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 0.7) inset;
+  background-color: #2798ca;
+  height: 10px;
+  box-sizing: border-box;
+  border: 1px solid #2798ca;
+  background: linear-gradient(to top, #2798ca 0%, #9ed4ec 100%);
 }
 .border-left {
   border-left: 1px solid #dfdfdf;
+}
+.border-right {
+  border-right: 1px solid #dfdfdf;
+}
+.grid-number {
+  border-right: 1px solid #dfdfdf;
+  vertical-align: bottom;
+  text-align: right;
+  font-weight: normal;
+  font-size: 0.8em;
 }
 code {
   font-weight: bold;
@@ -280,24 +301,4 @@ code:before {
 }
 code:after {
   content: '>';
-}
-.tag-row {
-  -webkittransition: color none;
-  transition: color none;
-}
-.tag-row.ng-enter {
-  -webkittransition: color 300ms;
-  transition: color 300ms;
-  color: #959595 !important;
-}
-.tag-row.ng-enter.ng-enter-active {
-  color: #2b2b2b !important;
-}
-.tag-row.ng-leave {
-  -webkittransition: color 300ms;
-  transition: color 300ms;
-  color: #2b2b2b !important;
-}
-.tag-row.ng-leave.ng-leave-active {
-  color: #959595 !important;
 }

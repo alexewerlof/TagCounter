@@ -10,7 +10,7 @@ body {
   cursor: default;
   color: @fg-color;
   background-color: @bg-color;
-  width: @screen-width;
+  //width: @screen-width;
 }
 
 a {
@@ -63,15 +63,33 @@ a {
 
 table {
   border-spacing: 0;
-  width: 100%;
+  width: @screen-width;
+  table-layout: fixed;
 
-  th,
-  td {
-    text-align: left;
-    padding: 0.7em;
+  .tag-col {
+    width: 170px;
   }
 
-  tbody tr {
+  .count-col {
+    width: 50px;
+  }
+
+  .grid-col {
+    width: 50px;
+  }
+
+  thead,
+  tbody {
+    th,
+    td {
+      text-align: left;
+      padding: 0.3em;
+    }
+  }
+
+  tbody {
+    position: relative;
+
     &:nth-child(even) {
       background-color: mix(@fg-color, @bg-color, 2%);
     }
@@ -79,44 +97,53 @@ table {
     &:nth-child(odd) {
       background-color: mix(@fg-color, @bg-color, 6%);
     }
-
-    &.tag-row:hover {
-      background-color: @highlight-color;
-      color: white;
-
-      .border-left {
-        border-color: @highlight-color;
-      }
-
-      .subtle-text {
-        color: inherit;
-      }
-
-      .bar {
-        background-color: white;
-        border-color: white;
-      }
-    }
   }
 }
 
+.highlight-on-hover {
+  border: 1px solid transparent;
+
+  &:hover {
+    border-color: @highlight-color;
+  }
+}
+
+.bar-cell {
+  position: relative;
+  height: 0;
+  font-size: 0;
+}
+
 .bar-container {
-  width: 100px;
+  width: 100%;
+  position: absolute;
+  top: -15px;
 
   .bar {
     width: 0%; // the width will adjust the progress bar
     transition: width 1s;
     background-color: @bar-color;
     height: @bar-height;
-    min-width: @bar-height;
-    border-radius: @bar-height;
+    box-sizing: border-box;
     border: 1px solid @bar-color;
-    box-shadow: 0 1px 1px 0px fade(#fff, 70%) inset;
+    background: linear-gradient(to top,  @bar-color 0%, lighten(@bar-color, 30%) 100%);
   }
 }
 
 .border-left {
   border-left: 1px solid @border-color;
+}
+
+.border-right {
+  border-right: 1px solid @border-color;
+}
+
+.grid-number {
+  border-right: 1px solid @border-color;
+  vertical-align: bottom;
+  text-align: right;
+  font-weight: normal;
+  font-size: 0.8em;
 }
 
 code {
