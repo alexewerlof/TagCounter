@@ -1,21 +1,21 @@
 {
-  "name": "TagCounter",
-  "version": "3.0.2",
+  "name": "tag-counter",
+  "private": true,
+  "version": "4.0.0",
   "description": "Counts the number of tags in a page.",
   "main": "src/tagcounter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf build/* && webpack"
   },
   "devDependencies": {
-    "gulp": "~3.8.x",
-    "gulp-clean": "^0.3.0",
-    "gulp-json-editor": "^2.0.2",
-    "gulp-jsonminify": "0.0.1",
-    "gulp-minify-css": "^0.3.7",
-    "gulp-minify-html": "^0.1.4",
-    "gulp-size": "^0.3.1",
-    "gulp-uglify": "^0.3.0",
-    "gulp-zip": "^0.3.4"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.3.1",
+    "css-loader": "^0.28.7",
+    "vue-loader": "^13.6.2",
+    "vue-template-compiler": "^2.5.13",
+    "webpack": "^3.10.0"
   },
   "author": "Alex Ewerlöf",
   "license": "MIT",
@@ -23,5 +23,8 @@
     "type": "git",
     "url": "https://github.com/hanifbbz/TagCounter.git"
   },
-  "homepage": "http://www.userpixel.com"
+  "homepage": "http://www.userpixel.com",
+  "dependencies": {
+    "vue": "^2.5.13"
+  }
 }

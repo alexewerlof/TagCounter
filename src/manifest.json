@@ -6,7 +6,7 @@
     "icons": {
         "128": "img/icon128.png"
     },
-    "page_action": {
+    "browser_action": {
         "default_icon": {
             "19": "img/icon19.png",
             "38": "img/icon38.png"
@@ -14,14 +14,10 @@
         "default_title": "Tag Counter",
         "default_popup": "popup.html"
     },
-    "background": {
-        "scripts": ["js/eventPage.js"],
-        "persistent": false
-    },
     "content_scripts": [
         {
-            "matches": ["*://*/*"],
-            "js": ["js/TagCounter-content-script.js"]
+            "matches": ["<all_urls>"],
+            "js": ["content-script.js"]
         }
     ]
 }

@@ -1,3 +1,11 @@
+[v-cloak] {
+  display: none;
+}
+
+body, html {
+  height: 400px;
+}
+
 /** this is a mixin that adds Angular animations to an element */
 @font-face {
   font-family: 'FontAwesome';
@@ -274,12 +282,6 @@ table tbody tr.tag-row:hover .bar {
 code {
   font-weight: bold;
   font-family: inherit;
-}
-code:before {
-  content: '<';
-}
-code:after {
-  content: '>';
 }
 .tag-row {
   -webkittransition: color none;

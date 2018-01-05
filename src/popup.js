@@ -1,8 +1,63 @@
 /*global chrome*/
+
+import Vue from 'vue.js';
+import stats from './stats.vue';
+
+function tellContentScript(fname, ...args) {
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+            chrome.tabs.sendMessage(tabs[0].id, { fname, args }, (ret) => {
+                ret === undefined ? reject(chrome.runtime.lastErro) : resolve(ret)
+            });
+        });
+    });
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    alert(request);
+    // sendResponse({farewell: "goodbye"});
+});
+
+const popup = new Vue({
+    el: '#app',
+    created() {
+        this.getTagList();
+    },
+    methods: {
+        getTagList() {
+            return tellContentScript('getTagList').then(tags => this.tags = tags);
+        },
+        highlight(tagName) {
+            return tellContentScript('highlight', tagName);
+        },
+        unhighlight() {
+            return tellContentScript('unhighlight');
+        }
+    },
+    data: {
+        tags: []
+    },
+    render(h) {
+        return h('stats', {
+            props: {
+                tags: this.tags,
+                getTagList: this.getTagList,
+                highlight: this.highlight,
+                unhighlight: this.unhighlight
+            }
+        });
+    },
+    components: { stats }
+});
+
+/*
 var app = angular.module('popup', []);
 
 app.constant('chrome', chrome);
-app.constant('chromea', {
+app.constant('chrome', {
     tabs: {
         query: function (query, callback) {
             callback([1]);
@@ -18,10 +73,8 @@ app.constant('chromea', {
 app.factory('getTabId', ['chrome', function (chrome) {
     //cache the tabId
     var tabIdCache;
-    /**
-     * does something in the current tab. For speed improvement it caches the tabId
-     * @param callback {function} The function to call when the tabId is resolved
-     */
+    // does something in the current tab. For speed improvement it caches the tabId
+    // @param callback {function} The function to call when the tabId is resolved
     return function getTabId(callback) {
         if (tabIdCache) {
             callback(tabIdCache);
@@ -35,11 +88,10 @@ app.factory('getTabId', ['chrome', function (chrome) {
 }]);
 
 app.factory('sendMessage', ['chrome', 'getTabId', function (chrome, getTabId) {
-    /**
-     * Sends a message to the content script
-     * @param msg {Object} the message object
-     * @param callback [function] the function that processes the results from the content script
-     */
+    // Sends a message to the content script
+    // @param msg {Object} the message object
+    // @param callback [function] the function that processes the results from the content script
+    //
     return function sendMessage(msg, callback) {
         getTabId(function (tabId) {
             chrome.tabs.sendMessage(tabId, msg, callback || angular.noop);
@@ -136,3 +188,4 @@ app.controller('TagCounterCtrl', ['$scope', 'sendMessage', 'tagType', function (
         sendMessage({fname:'unhighlight'});
     };
 }]);
+*/
